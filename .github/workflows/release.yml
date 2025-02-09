@@ -25,6 +25,7 @@ jobs:
     - name: Build and Publish
       run: |
         nix build '.#publish.chisel'
+        find result/ -name '*.jar' -exec cp {} . \;
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
@@ -36,6 +37,6 @@ jobs:
           Release Date: ${{ env.RELEASE_DATE }}
           Built with Mill
         files: |
-          result/**/*.jar
+          *.jar
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
