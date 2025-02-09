@@ -11,8 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
+    - uses: DeterminateSystems/nix-installer-action@main
+    - uses: DeterminateSystems/magic-nix-cache-action@main
 
     - name: Update chisel
       run: |
@@ -20,12 +21,6 @@ jobs:
         nix run github:berberman/nvfetcher
         echo "CHISEL_VERSION=main" >> $GITHUB_ENV
         echo "RELEASE_DATE=$(date +'%Y%m%d')" >> $GITHUB_ENV
-
-    - name: Setup Java
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin'
-        java-version: '11'
 
     - name: Build and Publish
       run: |
