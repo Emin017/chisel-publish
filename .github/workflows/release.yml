@@ -1,0 +1,46 @@
+name: Sync and Release Chisel
+
+on:
+  schedule:
+    # Trigger every Tuesday and Friday at 8:00 UTC
+    - cron: '0 8 * * 2,5'
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  sync-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Update chisel
+      run: |
+        cd nix/chisel
+        nix run github:berberman/nvfetcher
+        echo "CHISEL_VERSION=main" >> $GITHUB_ENV
+        echo "RELEASE_DATE=$(date +'%Y%m%d')" >> $GITHUB_ENV
+
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '11'
+
+    - name: Build and Publish
+      run: |
+        nix build '.#publish.chisel'
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        name: Chisel ${{ env.CHISEL_VERSION }}-${{ env.RELEASE_DATE }}
+        tag_name: ${{ env.CHISEL_VERSION }}-${{ env.RELEASE_DATE }}
+        body: |
+          Automated sync release of Chisel ${{ env.CHISEL_VERSION }}
+          Release Date: ${{ env.RELEASE_DATE }}
+          Built with Mill
+        files: |
+          result/**/*.jar
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
