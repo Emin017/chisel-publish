@@ -1,0 +1,23 @@
+{
+    "chisel": {
+        "cargoLocks": null,
+        "date": "2025-02-08",
+        "extract": null,
+        "name": "chisel",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "chipsalliance",
+            "repo": "chisel",
+            "rev": "a2b40360e3dd4e2faedad52989865ffc3a1abbdd",
+            "sha256": "sha256-w0e2GONv0wk0lGGosDfQfuKv2olRIj+FvaqwVVLXQCE=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "a2b40360e3dd4e2faedad52989865ffc3a1abbdd"
+    }
+}

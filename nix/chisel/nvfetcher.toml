@@ -1,4 +1,4 @@
-[nvim]
+[chisel]
 src.git = "https://github.com/chipsalliance/chisel"
 src.branch = "main"
-fetch.github = "chipalliance/chisel"
+fetch.github = "chipsalliance/chisel"

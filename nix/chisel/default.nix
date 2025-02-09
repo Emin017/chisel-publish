@@ -14,7 +14,7 @@ let
       sources = ./_sources/generated.nix;
       deps = lib.filterAttrs (_: v: v ? src) (pkgs.callPackage sources { });
     in
-    deps.chisel;
+    deps.chisel.src;
 in
 publishMillJar rec {
   name = "chisel";
