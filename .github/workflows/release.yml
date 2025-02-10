@@ -28,17 +28,24 @@ jobs:
       run: |
         nix build '.#publish.chisel'
         find result/ -name '*.jar' -exec cp {} . \;
+        nix-shell -p zip --run "zip chisel-publish.zip *.jar"
+        echo "ZIP_SHA256=$(nix-hash --type sha256 --base32 chisel-publish.zip)" >> $GITHUB_ENV
+        echo "ZIP_MD5=$(nix-hash --type md5 --base32 chisel-publish.zip)" >> $GITHUB_ENV
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
-        name: Chisel ${{ env.CHISEL_VERSION }}-${{ env.RELEASE_DATE }}
+        name: Chisel version ${{ env.CHISEL_VERSION }}-${{ env.RELEASE_DATE }}
         tag_name: ${{ env.CHISEL_VERSION }}-${{ env.RELEASE_DATE }}
         body: |
           Automated sync release of Chisel ${{ env.CHISEL_VERSION }}
           Release Date: ${{ env.RELEASE_DATE }}
           Built with Mill
+
+          ## Hash Values
+          - SHA256: ${{ env.ZIP_SHA256 }}
+          - MD5: ${{ env.ZIP_MD5 }}
         files: |
-          *.jar
+          *.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
