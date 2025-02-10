@@ -8,4 +8,4 @@ It will package the chisel and chisel-plugin into jar files and publish them to 
 
 ## Acknowledgement
 
-This repository is inspired by [chipsalliance/chisel-nix](https://github.com/chipsalliance/chisel-nix), and the fetch-mill-deps.nix and config-home.nix which are used to fetch the dependencies of chisel and chisel-plugin are also from chisel-nix.
+This repository is inspired by [chipsalliance/chisel-nix](https://github.com/chipsalliance/chisel-nix), and the [fetch-mill-deps](nix/fetch-mill-deps.nix), [publish-mill-jar](nix/publish-mill-jar.nix) and [config-home](nix/config-home.nix) are also from chisel-nix.
