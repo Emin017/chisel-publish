@@ -28,7 +28,7 @@ publishMillJar rec {
     chiselDeps = fetchMillDeps {
       name = "chisel";
       src = chiselSrc;
-      millDepsHash = "sha256-ukG2oObq2GGeyjVtr8QiwNMnXPs6iX6ZvFiAFjR7ifk=";
+      millDepsHash = "sha256-qght2ktIPXK/QPaIg5B6vKi19QorF3DvQ+zQdo7XX6g=";
     };
   };
 
